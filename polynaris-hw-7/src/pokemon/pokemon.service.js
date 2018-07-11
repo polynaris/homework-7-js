@@ -1,16 +1,18 @@
 export default class PokemonService {
+    constructor() {
+        this.pageNumber = 0;
+    }
+
     getAllAsync() {
-        return fetch({
-            url: '/pokemons',
-            method: 'GET',
-        })
+        return fetch('/pokemons')
     }
 
     getByIdAsync(id) {
-
+        return fetch(`/pokemons?id=${id}`)
     }
 
-    getPageAsync(size, pageNumber) {
-
+    getPageAsync() {
+        this.pageNumber++;
+        return fetch(`/pokemons?_page=${this.pageNumber}`);
     }
 }

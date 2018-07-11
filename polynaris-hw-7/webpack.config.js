@@ -11,22 +11,22 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['react']
-                    }
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['react']
                 }
-            },
-            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader']
-                })
             }
+        },
+        {
+            test: /\.css$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: ['css-loader']
+            })
+        }
         ]
     },
     plugins: [
@@ -38,11 +38,9 @@ module.exports = {
     ],
     devServer: {
         historyApiFallback: true,
-        proxy: {
-          '/pokemons': {
-            target: 'http://localhost:3000',
-            pathRewrite: {'^/pokemons' : ''}
-          }
-        }
+        proxy: [{
+            path: '/pokemons/',
+            target: 'http://localhost:3000'
+        }]
     }
 };
